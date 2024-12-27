@@ -1,20 +1,19 @@
-import {View, Image} from "react-native";
-import {GooglePlacesAutocomplete} from "react-native-google-places-autocomplete";
+import { Image, View } from "react-native";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-import {icons} from "@/constants";
-import {GoogleInputProps} from "@/types/type";
+import { icons } from "@/constants";
+import { GoogleInputProps } from "@/types/type";
 
 const googlePlacesApiKey = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
 
 const GoogleTextInput = ({
-                           icon,
-                           initialLocation,
-                           containerStyle,
-                           textInputBackgroundColor,
-                           handlePress,
-                         }: GoogleInputProps) => {
-
-  console.log("API KEY: ",googlePlacesApiKey)
+  icon,
+  initialLocation,
+  containerStyle,
+  textInputBackgroundColor,
+  handlePress,
+}: GoogleInputProps) => {
+  console.log("API KEY: ", googlePlacesApiKey);
   return (
     <View
       className={`flex flex-row items-center justify-center relative z-50 rounded-xl ${containerStyle}`}

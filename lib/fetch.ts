@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export const fetchAPI = async (url: string, options?: RequestInit) => {
   try {
@@ -36,5 +36,5 @@ export const useFetch = <T>(url: string, options?: RequestInit) => {
     fetchData();
   }, [fetchData]);
 
-  return {data, loading, error, refetch: fetchData};
+  return { data, loading, error, refetch: fetchData };
 };

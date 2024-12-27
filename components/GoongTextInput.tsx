@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import {
   View,
   TextInput,
@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import {useLocationStore} from "@/store";
+import { useLocationStore } from "@/store";
 
-const goongKeyApi = process.env.EXPO_PUBLIC_GOONG_API_KEY
+const goongKeyApi = process.env.EXPO_PUBLIC_GOONG_API_KEY;
 
 const debounce = (func, delay) => {
   let timeout;
@@ -23,7 +23,7 @@ const GoongTextInput = ({ apiKey, onSelect }: any) => {
   const [input, setInput] = useState("");
   const [predictions, setPredictions] = useState([]);
 
-  const {setDestinationLocation} = useLocationStore()
+  const { setDestinationLocation } = useLocationStore();
 
   const fetchPredictions = async (text: any) => {
     if (text.length < 3) return; // Chỉ tìm kiếm khi input >= 3 ký tự
@@ -38,7 +38,9 @@ const GoongTextInput = ({ apiKey, onSelect }: any) => {
     }
   };
 
-  const debouncedFetchPredictions = useRef(debounce(fetchPredictions, 2000)).current;
+  const debouncedFetchPredictions = useRef(
+    debounce(fetchPredictions, 2000),
+  ).current;
 
   const handleSelect = (place: any) => {
     setInput(place.description);
@@ -59,7 +61,7 @@ const GoongTextInput = ({ apiKey, onSelect }: any) => {
           // Kiểm tra nếu có geometry và location
           if (geometry && geometry.location) {
             const { lat, lng } = geometry.location;
-            console.log('latitude: ',lat,'longitude: ',lng)
+            console.log("latitude: ", lat, "longitude: ", lng);
             // Cập nhật vào store của Zustand
             setDestinationLocation({
               latitude: lat,
@@ -79,18 +81,19 @@ const GoongTextInput = ({ apiKey, onSelect }: any) => {
         console.error("Error fetching place details", error);
       }
     };
-    fetchPlaceDetails(place.place_id)
+    fetchPlaceDetails(place.place_id);
   };
 
   return (
     <View>
       <TextInput
         style={styles.input}
+        placeholderTextColor={"#ccc"}
         placeholder="Search for a location"
         value={input}
         onChangeText={(text) => {
           setInput(text);
-          debouncedFetchPredictions(text)
+          debouncedFetchPredictions(text);
         }}
       />
       {predictions.length > 0 && (
